@@ -15,6 +15,9 @@ public class CalculatorCreator{
 		else if(calculator_name.equalsIgnoreCase("Mutual")) {
 			return new MutualCalculator();
 		}
+		else if(calculator_name.equalsIgnoreCase("SubLocSimilarity")) {
+			return new SubLocSimilarity();
+		}
 		else if(calculator_name.equalsIgnoreCase("Simple")) {
 			return new Simple();
 		}
