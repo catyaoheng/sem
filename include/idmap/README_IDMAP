@@ -1,0 +1,3 @@
+#ALL ref maps are consistent of two columns
+#	columns[0] is the unknown id
+#	columns[1] is the known id which can be found in idmap

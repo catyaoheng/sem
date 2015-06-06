@@ -1,0 +1,369 @@
+#configuration
+#tabs
+#head	folder_name
+#file_name	table_line_num	table_column_num	table_index_num	table_select_line_nums	table_select_column_nums	
+#matrix_name	matrix_type	matrix_vector_num	matrix_vector_length	
+#calculator_name
+
+#Attention: 
+#All num counts from 0.
+#All sub-tab begains with /t(tab).
+#And the sub-tab-name is the first term in the line. 
+#All blank is " "(space).
+#All indentation is made by "/t"(tab)
+#All splitors are made by "= "(space but not tab)
+#All file_name should not 
+#All "blank_line" should be truly "blank". For example, not begin with "tab". which make the line looks like "blank".
+
+#	table_select_line_markers: the first string in this tab is the column num where the markers are.
+#	table_discard_column_nums: the discarded str will become "".
+
+#config	config
+#folder_name	config
+#file_name	config
+
+<idmap>
+	folder_name= idmap
+	file_names= gene_idmap, coexpression_index, geneontology_index, map_result, ref_aff_agi, arathPhyProfile2GeneEntrezId
+	phylogenetic= 0
+	coexpression= 1
+	geneontology= 1
+	domain= 1
+	#	0 is need map
+<end>
+
+# === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
+<phylogenetic>
+	feature_name= phylogenetic
+	folder_name= phylogenetic
+	value_num= 2
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	file_names= arathPhyProfile_100
+		<arathPhyProfile_100>
+			file_index_column_nums= 1
+			ref_idmap= arathPhyProfile2GeneEntrezId
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	table_names= table_arathPhyProfile_100
+		<table_arathPhyProfile_100>
+			table_data_source= arathPhyProfile_100
+			table_discard_column_nums= 0, 1, 2, 3
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	matrix_names= matrix_arathPhyProfile_100
+		<matrix_arathPhyProfile_100>
+			matrix_data_source= table_arathPhyProfile_100
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	calculator_names= pearsons, mutual
+		<pearsons>
+			calculator_data_source= matrix_arathPhyProfile_100
+			is_Abs= 1
+			value_mergin_method= most_correlated
+		<end>
+		<mutual>
+			calculator_data_source= matrix_arathPhyProfile_100
+			is_Abs= 1
+			value_mergin_method= most_correlated
+		<end>
+<end>
+
+# === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
+<coexpression>
+	feature_name= coexpression
+	folder_name= coexpression
+	value_num= 5
+
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	file_names= test_abiotic_100
+	#AtGe_Abiostress_gcRMA, AtGE_dev_gcRMA, AtGE_light_gcRMA, AtGE_pathogen_gcRMA, affy23k_1436_arrays_for_megacluster
+		<test_abiotic_100>
+			file_index_column_nums= 0
+		<end>
+		# === ==== ==== ==== ====
+		<AtGe_Abiostress_gcRMA>
+			file_index_column_nums= 1
+		<end>
+		# === ==== ==== ==== ====
+		<AtGE_dev_gcRMA>
+			file_index_column_nums= 1
+		<end>
+		# === ==== ==== ==== ====
+		<AtGE_light_gcRMA>
+			file_index_column_nums= 0
+			ref_idmap= ref_aff_agi
+		<end>
+		# === ==== ==== ==== ====
+		<AtGE_pathogen_gcRMA>
+			file_index_column_nums= 0
+			ref_idmap= ref_aff_agi
+		<end>
+		# === ==== ==== ==== ====
+		<affy23k_1436_arrays_for_megacluster>
+			file_index_column_nums= 0
+			ref_idmap= ref_aff_agi
+		<end>
+
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
+	table_names= table_test_abiotic_100
+	#table_AtGe_Abiostress_gcRMA, table_AtGE_dev_gcRMA, table_AtGE_light_gcRMA, table_AtGE_pathogen_gcRMA, table_affy23k_1436_arrays_for_megacluster
+		<table_test_abiotic_100>
+			table_data_source= test_abiotic_100
+			table_discard_column_nums= 0, 1, 2
+		<end>
+		# === ==== ==== ==== ====
+		<table_AtGe_Abiostress_gcRMA>
+			table_data_source= AtGe_Abiostress_gcRMA
+			table_select_column_nums= NA
+			table_discard_column_nums= 0, 1, 2, 3
+		<end>
+
+		# === ==== ==== ==== ====
+		<table_AtGE_dev_gcRMA>
+			table_data_source= AtGE_dev_gcRMA
+			table_select_column_nums= NA
+			table_discard_column_nums= 0, 1, 2, 3
+		<end>
+
+		# === ==== ==== ==== ====
+		<table_AtGE_light_gcRMA>
+			table_data_source= AtGE_light_gcRMA
+			table_select_column_nums= NA
+			table_discard_column_nums= 0, 1, 2
+		<end>
+
+		# === ==== ==== ==== ====
+		<table_AtGE_pathogen_gcRMA>
+			table_data_source= AtGE_pathogen_gcRMA
+			table_select_column_nums= NA
+			table_discard_column_nums= 0, 1, 2
+		<end>
+
+		# === ==== ==== ==== ====
+		<table_affy23k_1436_arrays_for_megacluster>
+			table_data_source= affy23k_1436_arrays_for_megacluster
+			table_select_column_nums= NA
+			table_discard_column_nums= 0, 1, 2
+		<end>
+
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
+	matrix_names= matrix_test_abiotic_100
+	#matrix_AtGe_Abiostress_gcRMA, matrix_AtGE_dev_gcRMA, matrix_AtGE_light_gcRMA, matrix_AtGE_pathogen_gcRMA, matrix_affy23k_1436_arrays_for_megacluster
+		<matrix_test_abiotic_100>
+			matrix_data_source= table_test_abiotic_100
+		<end>
+		# === ==== ==== ==== ====
+		<matrix_AtGe_Abiostress_gcRMA>
+			matrix_data_source= table_AtGe_Abiostress_gcRMA
+		<end>
+
+		# === ==== ==== ==== ====
+		<matrix_AtGE_dev_gcRMA>
+			matrix_data_source= table_AtGE_dev_gcRMA
+		<end>
+
+		# === ==== ==== ==== ====
+		<matrix_AtGE_light_gcRMA>
+			matrix_data_source= table_AtGE_light_gcRMA
+		<end>
+
+		# === ==== ==== ==== ====
+		<matrix_AtGE_pathogen_gcRMA>
+			matrix_data_source= table_AtGE_pathogen_gcRMA
+		<end>
+
+		# === ==== ==== ==== ====
+		<matrix_affy23k_1436_arrays_for_megacluster>
+			matrix_data_source= table_affy23k_1436_arrays_for_megacluster
+		<end>
+
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
+	calculator_names= pearsons
+		<pearsons>
+			calculator_data_source= matrix_test_abiotic_100
+			#matrix_AtGe_Abiostress_gcRMA, matrix_AtGE_dev_gcRMA, matrix_AtGE_light_gcRMA, matrix_AtGE_pathogen_gcRMA, matrix_affy23k_1436_arrays_for_megacluster
+			is_Abs= 1
+			value_mergin_method= most_correlated
+		<end>
+<end>
+
+
+# === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
+<geneontology>
+	feature_name= geneontology
+	folder_name= geneontology
+	value_num= 3
+
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	file_names= gene_association, gene_product_count, term, term2term
+
+		# === ==== ==== ==== ====
+		<gene_association>
+			file_index_column_nums= 10
+		<end>
+
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
+	table_names= table_term, table_gene_association, table_gene_association_fun, table_gene_association_pro, table_gene_association_com, table_term2term, table_term_id_pool_fun, table_term_id_pool_pro, table_term_id_pool_com, table_gene_product_count, table_gene_profile_fun, table_gene_profile_pro, table_gene_profile_com
+		# === ==== ==== ==== ====
+		<table_term>
+			table_data_source= term
+			table_select_column_nums= 0, 3
+			#	column 0 is the termId
+			#	column 3 is the goAcc
+		<end>
+		# === ==== ==== ==== ====
+		<table_gene_association>
+			table_data_source= gene_association
+			table_refer_source= table_term
+			table_select_column_nums= 6, 8, 10
+			#table_select_column_nums is set by the mapped file
+			#	column 1 is the mapped access of gene_id_map
+			#	column 6 is the term_id of GO term attached to the gene
+			#	column 8 is the evidence
+			#	column 10 is the classification
+			#	table_select_line_markers: the first string in this tab is the column num where the markers are.
+			table_select_line_markers= 8, EXP, IDA, IMP, IGI, TAS, IPI, IEP, ISS, ISO, ISA, ISM, IGC, RCA
+		<end>
+		<table_gene_association_fun>
+			table_data_source= table_gene_association
+			table_select_column_nums= 6
+			table_select_line_markers= 10, F
+		<end>
+		<table_gene_association_pro>
+			table_data_source= table_gene_association
+			table_select_column_nums= 6
+			table_select_line_markers= 10, P
+		<end>
+		<table_gene_association_com>
+			table_data_source= table_gene_association
+			table_select_column_nums= 6
+			table_select_line_markers= 10, C
+		<end>
+
+		# === ==== ==== ==== ====
+		<table_term2term>
+			table_data_source= term2term
+			table_select_column_nums= 2, 3
+			#	column 2 is the parent GO_id
+			#	column 3 is the child GO_id
+		<end>
+
+		# === ==== ==== ==== ====
+		# need operation
+		# need reference table
+		<table_term_id_pool_fun>
+			table_data_source= table_gene_association_fun
+			table_refer_source= table_term2term
+		<end>
+		<table_term_id_pool_pro>
+			table_data_source= table_gene_association_pro
+			table_refer_source= table_term2term
+		<end>
+		<table_term_id_pool_com>
+			table_data_source= table_gene_association_com
+			table_refer_source= table_term2term
+		<end>
+
+		# === ==== ==== ==== ====
+		<table_gene_product_count>
+			table_data_source= gene_product_count
+			#	table_select_column_nums= all
+			#	column 0 is the GO_id
+			#	column 1 is the product_count_number
+		<end>
+
+		# === ==== ==== ==== ====
+		<table_gene_profile_fun>
+			table_data_source= table_term_id_pool_fun
+			table_refer_source= table_gene_product_count
+		<end>
+		<table_gene_profile_pro>
+			table_data_source= table_term_id_pool_pro
+			table_refer_source= table_gene_product_count
+		<end>
+		<table_gene_profile_com>
+			table_data_source= table_term_id_pool_com
+			table_refer_source= table_gene_product_count
+		<end>
+
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
+	matrix_names= matrix_gene_profile_pro, matrix_gene_profile_fun, matrix_gene_profile_com
+		<matrix_gene_profile_fun>
+			matrix_data_source= table_gene_profile_fun
+		<end>
+		<matrix_gene_profile_pro>
+			matrix_data_source= table_gene_profile_pro
+		<end>
+		<matrix_gene_profile_com>
+			matrix_data_source= table_gene_profile_com
+		<end>
+
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
+	calculator_names= minimum_count
+		<minimum_count>
+			calculator_data_source= matrix_gene_profile_pro, matrix_gene_profile_fun, matrix_gene_profile_com
+			value_mergin_method= most_correlated
+		<end>
+<end>
+
+# === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
+<domain>
+	feature_name= domain
+	folder_name= domain
+	value_num= 15
+
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	file_names= arth_all_domains, domain_interaction
+
+		# === ==== ==== ==== ====
+		<arth_all_domains>
+			file_index_column_nums= 0
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	table_names= table_arth_all_domains, table_domain_interaction
+		<table_arth_all_domains>
+			table_data_source= arth_all_domains
+			table_select_column_nums= 3
+		<end>
+		<table_domain_interaction>
+			table_data_source= domain_interaction
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	matrix_names= matrix_arth_all_domains, matrix_domain_interaction
+		<matrix_arth_all_domains>
+			matrix_data_source= table_arth_all_domains
+		<end>
+		<matrix_domain_interaction>
+			matrix_data_source= table_domain_interaction
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	calculator_names= countDomain
+		<countDomain>
+			calculator_data_source= matrix_arth_all_domains
+			calculator_refer_source= matrix_domain_interaction
+			value_mergin_method= most_correlated
+		<end>
+<end>
+
+#[test]
+#nyan= nyan
+#[end]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
