@@ -16,7 +16,10 @@ public class CalculatorCreator{
 			return new MutualCalculator();
 		}
 		else if(calculator_name.equalsIgnoreCase("SubLocSimilarity")) {
-			return new SubLocSimilarity();
+			return new SimpleSubLocSimilarity();
+		}
+		else if(calculator_name.equalsIgnoreCase("SubaSimilarity")) {
+			return new SubaSimilarity();
 		}
 		else if(calculator_name.equalsIgnoreCase("Simple")) {
 			return new Simple();

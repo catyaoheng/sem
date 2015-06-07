@@ -25,7 +25,7 @@
 <idmap>
 	folder_name= idmap
 	file_names= gene_idmap, coexpression_index, geneontology_index, map_result, ref_aff_agi, arathPhyProfile2GeneEntrezId
-	colocal= 0
+	colocal= 1
 	phylogenetic= 1
 	coexpression= 1
 	geneontology= 1
@@ -39,25 +39,35 @@
 	folder_name= colocalization
 	value_num= 1
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	file_names= arathSuba_100
-		<arathSuba_100>
+	file_names= arathSuba
+		<arathSuba>
 			file_index_column_nums= 0
 		<end>
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	table_names= table_arathSuba_100
-		<table_arathSuba_100>
-			table_data_source= arathSuba_100
+	table_names= table_arathSubaProtein, table_arathSuba, table_arathSubaList
+		<table_arathSubaProtein>
+			table_data_source= arathSuba
+			table_discard_column_nums= 0, 1
+		<end>
+		<table_arathSuba>
+			table_data_source= arathSuba
 			table_discard_column_nums= 0, 1, 2
 		<end>
-	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	matrix_names= matrix_arathSuba_100
-		<matrix_arathSuba_100>
-			matrix_data_source= table_arathSuba_100
+		<table_arathSubaList>
 		<end>
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	calculator_names= subLocSimilarity
-		<subLocSimilarity>
-			calculator_data_source= matrix_arathSuba_100
+	matrix_names= matrix_arathSuba, matrix_arathSubaList
+		<matrix_arathSuba>
+			matrix_data_source= table_arathSuba
+		<end>
+		<matrix_arathSubaList>
+			matrix_data_source= table_arathSubaList
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	calculator_names= subaSimilarity
+		<subaSimilarity>
+			calculator_data_source= matrix_arathSuba
+			calculator_refer_source= matrix_arathSubaList
 			is_Abs= 1
 			value_mergin_method= most_correlated
 		<end>
@@ -86,7 +96,7 @@
 			matrix_data_source= table_arathPhyProfile
 		<end>
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	calculator_names= pearsons, mutual
+	calculator_names= mutual
 		<pearsons>
 			calculator_data_source= matrix_arathPhyProfile
 			is_Abs= 1

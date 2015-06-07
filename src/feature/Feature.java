@@ -167,7 +167,9 @@ public abstract class Feature{
 			String currentTableName = tableNameList.get(i);
 			HashMap<String, ArrayList<String>> currentTableInfo = state.getTable_info(currentTableName);
 				ArrayList<String> currentTableSourceNameList = new ArrayList<String>();
-				currentTableSourceNameList.addAll(currentTableInfo.get("table_data_source"));
+				if(currentTableInfo.containsKey("table_data_source")){
+					currentTableSourceNameList.addAll(currentTableInfo.get("table_data_source"));
+				}
 				if(currentTableInfo.containsKey("table_refer_source")){
 					currentTableSourceNameList.addAll(currentTableInfo.get("table_refer_source"));
 				}
@@ -190,8 +192,9 @@ public abstract class Feature{
         //System.out.println(table_pool.get("table_gene_association").getTable_data().get("5"));
         //System.out.println(table_pool.get("table_gene_association").getTable_data().get("8"));
         //System.out.println(table_pool.get("table_gene_association").getTable_data().get("9"));
-        //System.out.println(table_pool.get("table_gene_association").getTable_data().get("13"));
-		//Probe.probeMap("table_list_GEO_1893_RMA.txt", table_pool.get("table_list_GEO_1893_RMA.txt").getTable_data(), false);
+        //System.out.println(table_pool);
+		//Probe.probeMap("table_arathSuba", table_pool.get("table_arathSuba").getTable_data(), false);
+		//Probe.probeMap("table_arathSubaList", table_pool.get("table_arathSubaList").getTable_data(), false);
 		//Probe.probeMap("table_term_id_pool_pro", table_pool.get("table_term_id_pool_pro").getTable_data(), false);
 		//Probe.probeMap("table_gene_product_count", table_pool.get("table_gene_product_count").getTable_data(), false);
 		//System.out.println(table_pool.get("table_term").getTable_data().size());
@@ -260,6 +263,7 @@ public abstract class Feature{
 			String current_matrix_name = matrix_name_pool.get(i);
 			HashMap<String, ArrayList<String>> current_matrix_info = state.getMatrix_info(current_matrix_name);
 			ArrayList<String> current_matrix_source_name_pool = new ArrayList<String>();
+			System.out.println();
 			current_matrix_source_name_pool.addAll(current_matrix_info.get("matrix_data_source"));
 			//Prepare matrix_data_source_pool.
 			HashMap<String, HashMap<String, ArrayList<String[]>>> current_matrix_data_source_pool = new HashMap<String, HashMap<String, ArrayList<String[]>>>();
@@ -279,6 +283,8 @@ public abstract class Feature{
 		
 		//*/test_matrix
 		//Probe.probeMap("matrix_list_GEO_1893_RMA.txt", matrix_pool.get("matrix_list_GEO_1893_RMA.txt").getMatrix_data(), false);
+		//Probe.probeMap("matrix_arathSuba", matrix_pool.get("matrix_arathSuba").getMatrix_data(), false);
+		//Probe.probeMap("matrix_arathSubaList", matrix_pool.get("matrix_arathSubaList").getMatrix_data(), false);
 		//*/
 		
 		System.out.println("\t\tPreparing Matrices Finished");

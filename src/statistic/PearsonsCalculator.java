@@ -75,5 +75,11 @@ public class PearsonsCalculator extends Calculator {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	protected void prepareCalculatorDataRefpool() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

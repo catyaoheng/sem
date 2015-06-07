@@ -84,6 +84,12 @@ public class CountDomain extends Calculator {
 		return mergedValueStr;
 	}
 
+	@Override
+	protected void prepareCalculatorDataRefpool() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

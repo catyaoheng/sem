@@ -1,9 +1,4 @@
-/data
-/feature
-/machine
-/main
-/model
-/sem
-/statistic
-/tools
-/util
+/sem/
+/statistic/
+/feature/
+/data/

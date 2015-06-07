@@ -89,9 +89,11 @@ public abstract class Calculator {
 					value_block_cutter++;
 					//Cut block & write file
 					//System.out.println("$$$$\t"+value_block_cutter);
+					//*/
 					if(value_block_cutter%(id_matrix_size/10) == 0){
 						System.out.println("\t\t\t" + String.format("%.0f", (value_block_cutter*1.0/id_matrix_size*1.0)*100.0) + "% ..." + new Date());
 					}
+					//*/
 					if(value_block_cutter%100000 == 0){
 						//distributed_value[0] is the cluster.
 						ArrayList<Object> distributed_value_n_cluster = distributeValue(current_value_cluster_pool_10k, current_value_pool_10k);
@@ -125,9 +127,12 @@ public abstract class Calculator {
 				calculator_data_refer_pool.put(currentCalclatorReferName, calculator_data_source_pool.get(currentCalclatorReferName));
 				calculator_data_source_pool.remove(currentCalclatorReferName);
 			}
+			prepareCalculatorDataRefpool();
 		}
 	}
 	
+	protected abstract void prepareCalculatorDataRefpool();
+
 	private void prepareId_pool() {
 		Iterator iter =  calculator_data_source_pool.entrySet().iterator();
 		while(iter.hasNext()){

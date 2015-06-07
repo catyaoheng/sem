@@ -44,15 +44,17 @@ public class FormatedTable{
 
 	//Method[0]
 	private void prepareTable_source(HashMap<String, HashMap<String, ArrayList<String[]>>> table_data_source_pool) {
-		String table_data_source_name = table_info.get("table_data_source").get(0);
-		//System.out.println("%%%%"+ table_data_source_name);
-		//System.out.println("%%%%"+ table_data_source_pool.get(table_data_source_name));
-		Iterator iter = table_data_source_pool.entrySet().iterator();
-		while(iter.hasNext()){
-			Map.Entry entry = (Map.Entry) iter.next();
-			String current_entry_name = entry.getKey().toString();
-			if(current_entry_name.equalsIgnoreCase(table_data_source_name)){
-				table_data_source = table_data_source_pool.get(current_entry_name);
+		if(table_info.containsKey("table_data_source")){
+			String table_data_source_name = table_info.get("table_data_source").get(0);
+			//System.out.println("%%%%"+ table_data_source_name);
+			//System.out.println("%%%%"+ table_data_source_pool.get(table_data_source_name));
+			Iterator iter = table_data_source_pool.entrySet().iterator();
+			while(iter.hasNext()){
+				Map.Entry entry = (Map.Entry) iter.next();
+				String current_entry_name = entry.getKey().toString();
+				if(current_entry_name.equalsIgnoreCase(table_data_source_name)){
+					table_data_source = table_data_source_pool.get(current_entry_name);
+				}
 			}
 		}
 	}

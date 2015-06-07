@@ -3,7 +3,7 @@ import java.text.Format;
 import java.util.*;
 import tools.Idmap;
 
-public class SubLocSimilarity extends Calculator {
+public class SimpleSubLocSimilarity extends Calculator {
 
 	@Override
 	protected Object transformDataFormat(ArrayList<String[]> cluster){
@@ -74,5 +74,11 @@ public class SubLocSimilarity extends Calculator {
 			}
 		}
 		return co;
+	}
+
+	@Override
+	protected void prepareCalculatorDataRefpool() {
+		// TODO Auto-generated method stub
+		
 	}
 }

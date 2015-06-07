@@ -3,8 +3,6 @@ package statistic;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
-
 public class MinimumCount extends Calculator {
 
 	@Override
@@ -67,6 +65,12 @@ public class MinimumCount extends Calculator {
 	protected void operateDataRefer() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	protected void prepareCalculatorDataRefpool() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

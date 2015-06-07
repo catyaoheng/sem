@@ -4,8 +4,6 @@ import java.util.*;
 
 import javax.xml.crypto.dsig.Transform;
 
-import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
-
 import tools.Idmap;
 
 public class MutualCalculator extends Calculator {
@@ -18,7 +16,7 @@ public class MutualCalculator extends Calculator {
 			String[] current_vector = cluster.get(i);
 			double[] transformed_vector = new double[current_vector.length];
 			for(int j=0; j<current_vector.length; j++){
-				transformed_vector[j] = Integer.valueOf(current_vector[j]).intValue();
+				transformed_vector[j] = Double.valueOf(current_vector[j]).doubleValue();
 			}
 			transformed_vector_cluster.add(transformed_vector);
 		}
@@ -37,8 +35,7 @@ public class MutualCalculator extends Calculator {
 				double[] current_vector_1 = vector_cluster_double_1.get(j);
 //				for(double s:current_vector_0){System.out.println(s);}
 //				for(double s:current_vector_1){System.out.println(s);}
-				double current_value = new PearsonsCorrelation().correlation(current_vector_0, current_vector_1);
-				calculateMutualInformation(current_vector_0, current_vector_1, bit);
+				double current_value = calculateMutualInformation(current_vector_0, current_vector_1, bit);
 				///*
 				if(calculator_info.get("is_Abs").equals("1")){
 					if(current_value<0.0){
@@ -152,5 +149,11 @@ public class MutualCalculator extends Calculator {
 			}
 		}
 		return index;
+	}
+
+	@Override
+	protected void prepareCalculatorDataRefpool() {
+		// TODO Auto-generated method stub
+		
 	}
 }
