@@ -106,9 +106,11 @@ public class FileUtil {
 				else {
 					bw.write("\n" + current_assembled_line);
 				}
+				//*/
 				if(is_show_pro){
 					if(i%(lines.size()/10) == 0){System.out.println("\t\t\tWriting..." + (i/(lines.size()/10))*10 + "% ..." + new Date());}
 				}
+				//*/
 			}
 			bw.close();
 		} catch (Exception e) {

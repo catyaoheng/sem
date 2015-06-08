@@ -281,9 +281,11 @@ public class Idmap {
 		int id_matrix_size = current_file.size();
 		for(int i=0; i<current_file.size(); i++){
 			value_block_cutter++;
+			//*//
 			if(value_block_cutter%(id_matrix_size/10) == 0){
 				System.out.println("\t\t" + String.format("%.0f", (value_block_cutter*1.0/id_matrix_size*1.0)*100.0) + "% ..." + new Date());
 			}
+			//*/
 			String[] current_line = current_file.get(i);
 			String[] referred_line = current_line;
 			String current_original_id = current_line[index_num];

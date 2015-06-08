@@ -5,4 +5,5 @@ gene_association	61.59	99.24	NA
 AtGe_Abiostress_gcRMA	61.89	98.08	NA
 arathSuba_100	0.28	100.00	NA
 AtGE_pathogen_gcRMA	61.89	98.35	ref_idmap_name
+arathSuba	0.01	100.00	refColocalProtein
 affy23k_1436_arrays_for_megacluster	61.89	98.35	ref_idmap_name
