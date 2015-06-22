@@ -136,6 +136,9 @@ public class Idmap {
 	}
 	
 	public void mapAll(){
+		/*/
+		System.out.println(feature_name_pool.size());
+		//*/
 		for(int i=0; i<feature_name_pool.size(); i++){
 			String current_feature_name = feature_name_pool.get(i);
 			mapFeature(current_feature_name);
@@ -159,6 +162,7 @@ public class Idmap {
 	//Method[2]
 	private void mapFeature(String feature_name){
 		ArrayList<String> current_feature_info  = feature_info_pool.get(feature_name);
+		System.out.println(current_feature_info.size());
 		for(int i=0; i<current_feature_info.size(); i++){
 			String current_file_name = current_feature_info.get(i);
 			mapFile(feature_name, current_file_name, true);

@@ -25,12 +25,43 @@
 <idmap>
 	folder_name= idmap
 	file_names= gene_idmap, coexpression_index, geneontology_index, map_result, ref_aff_agi, arathPhyProfile2GeneEntrezId, refColocalProtein
-	colocalization= 0
+	colocalization= 1
 	phylogenetic= 1
 	coexpression= 1
 	geneontology= 1
 	domain= 1
+	interology= 1
 	#	0 is need map
+<end>
+
+# === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
+<interology>
+	feature_name= interology
+	folder_name= interology
+	value_num= 2
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	file_names= tempIndex
+		<tempIndex>
+			file_index_column_nums= 0
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	table_names= table_tempIndex
+		<table_tempIndex>
+			table_data_source= tempIndex
+			table_discard_column_nums= 0, 1
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	matrix_names= matrix_tempIndex
+		<matrix_tempIndex>
+			matrix_data_source= table_tempIndex
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	calculator_names= blastSimilarity
+		<blastSimilarity>
+			calculator_data_source= matrix_tempIndex
+			is_Abs= 1
+			value_mergin_method= most_correlated
+		<end>	
 <end>
 
 # === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
@@ -39,36 +70,46 @@
 	folder_name= colocalization
 	value_num= 1
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	file_names= arathSuba
+	file_names= arathSuba, unionProteinProfileTable
 		<arathSuba>
 			file_index_column_nums= 0
 			ref_idmap= refColocalProtein
 		<end>
-	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	table_names= table_arathSubaProtein, table_arathSuba, table_arathSubaList
-		<table_arathSubaProtein>
-			table_data_source= arathSuba
-			table_discard_column_nums= 0, 1
+		<unionProteinProfileTable>
 		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	table_names= table_arathSuba, table_unionProteinProfileTable
+	#table_arathSubaProtein, table_arathSubaList
+		#<table_arathSubaProtein>
+		#	table_data_source= arathSuba
+		#	table_discard_column_nums= 0, 1
+		#<end>
 		<table_arathSuba>
 			table_data_source= arathSuba
 			table_discard_column_nums= 0, 1, 2
 		<end>
-		<table_arathSubaList>
+		#<table_arathSubaList>
+		#<end>
+		<table_unionProteinProfileTable>
+			table_data_source= unionProteinProfileTable
 		<end>
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	matrix_names= matrix_arathSuba, matrix_arathSubaList
+	matrix_names= matrix_arathSuba, matrix_unionProteinProfileTable
+	#matrix_arathSubaList, 
 		<matrix_arathSuba>
 			matrix_data_source= table_arathSuba
 		<end>
-		<matrix_arathSubaList>
-			matrix_data_source= table_arathSubaList
+		#<matrix_arathSubaList>
+		#	matrix_data_source= table_arathSubaList
+		#<end>
+		<matrix_unionProteinProfileTable>
+			matrix_data_source= table_unionProteinProfileTable
 		<end>
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
 	calculator_names= subaSimilarity
 		<subaSimilarity>
 			calculator_data_source= matrix_arathSuba
-			calculator_refer_source= matrix_arathSubaList
+			calculator_refer_source= matrix_unionProteinProfileTable
 			is_Abs= 1
 			value_mergin_method= most_correlated
 		<end>
@@ -243,9 +284,15 @@
 		<gene_association>
 			file_index_column_nums= 10
 		<end>
+		<gene_product_count>
+		<end>
+		<term>
+		<end>
+		<term2term>
+		<end>
 
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
-	table_names= table_term, table_gene_association, table_gene_association_fun, table_gene_association_pro, table_gene_association_com, table_term2term, table_term_id_pool_fun, table_term_id_pool_pro, table_term_id_pool_com, table_gene_product_count, table_gene_profile_fun, table_gene_profile_pro, table_gene_profile_com
+	table_names= table_term, table_gene_association, table_gene_association_pro, table_term2term, table_term_id_pool_pro, table_gene_product_count, table_gene_profile_pro
 		# === ==== ==== ==== ====
 		<table_term>
 			table_data_source= term
@@ -264,6 +311,7 @@
 			#	column 8 is the evidence
 			#	column 10 is the classification
 			#	table_select_line_markers: the first string in this tab is the column num where the markers are.
+			table_goAcc_num= 6
 			table_select_line_markers= 8, EXP, IDA, IMP, IGI, TAS, IPI, IEP, ISS, ISO, ISA, ISM, IGC, RCA
 		<end>
 		<table_gene_association_fun>
@@ -309,6 +357,7 @@
 		# === ==== ==== ==== ====
 		<table_gene_product_count>
 			table_data_source= gene_product_count
+			table_refer_source= table_term2term, table_gene_association
 			#	table_select_column_nums= all
 			#	column 0 is the GO_id
 			#	column 1 is the product_count_number
@@ -329,7 +378,7 @@
 		<end>
 
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
-	matrix_names= matrix_gene_profile_pro, matrix_gene_profile_fun, matrix_gene_profile_com
+	matrix_names= matrix_gene_profile_pro
 		<matrix_gene_profile_fun>
 			matrix_data_source= table_gene_profile_fun
 		<end>
@@ -343,7 +392,7 @@
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
 	calculator_names= minimum_count
 		<minimum_count>
-			calculator_data_source= matrix_gene_profile_pro, matrix_gene_profile_fun, matrix_gene_profile_com
+			calculator_data_source= matrix_gene_profile_pro
 			value_mergin_method= most_correlated
 		<end>
 <end>

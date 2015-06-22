@@ -21,6 +21,12 @@ public class CalculatorCreator{
 		else if(calculator_name.equalsIgnoreCase("SubaSimilarity")) {
 			return new SubaSimilarity();
 		}
+		else if(calculator_name.equalsIgnoreCase("InparanoidSimilarity")) {
+			return new InparanoidSimilarity();
+		}
+		else if(calculator_name.equalsIgnoreCase("BlastSimilarity")) {
+			return new BlastSimilarity();
+		}
 		else if(calculator_name.equalsIgnoreCase("Simple")) {
 			return new Simple();
 		}

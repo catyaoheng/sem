@@ -41,11 +41,14 @@ public class MinimumCount extends Calculator {
 			for(int i=0; i<sharedProfileList.size(); i++){
 				int[] currentProfile = sharedProfileList.get(i);
 				int currentCount = currentProfile[1];
-				if(currentCount<=count){
+				if(currentCount<count){
 					count = currentCount;
 				}
+				
 			}
-			defaultValue = count + "";
+			//defaultValue = count + "";
+			//System.out.println(count);
+			defaultValue = (1.0*count)/(1.0*30322) + "";
 		}
 		String[] currentValueStrs = new String[3];
 		currentValueStrs[0] = currentClusterName[0];
@@ -56,8 +59,22 @@ public class MinimumCount extends Calculator {
 	}
 
 	@Override
-	protected String[] mergeValue(ArrayList<String[]> dotProduct) {
-		String[] mergedValueStr = dotProduct.get(0);
+	protected String[] mergeValue(ArrayList<String[]> valueCluster) {
+		String defaultValue = "NA";
+		//Double mergedValue = 30322.0;
+		Double mergedValue = 1.0;
+		String[] mergedValueStr = valueCluster.get(0);
+		for(int i=0; i<valueCluster.size(); i++){
+			String currentValueStr = valueCluster.get(i)[2];
+			if(!currentValueStr.equalsIgnoreCase("NA")){
+				Double currentValue = Double.valueOf(currentValueStr).doubleValue();
+				if(currentValue < mergedValue){
+					mergedValue = currentValue;
+					defaultValue = mergedValue+"";
+				}				
+			}
+		}
+		mergedValueStr[2] = defaultValue;
 		return mergedValueStr;
 	}
 

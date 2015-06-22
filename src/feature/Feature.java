@@ -101,9 +101,11 @@ public abstract class Feature{
 			//	System.out.println("$$" + current_file_name);
 			HashMap<String, ArrayList<String>> current_file_info_pool = state.getFile_info(current_file_name);
 			ArrayList<String[]> current_file = FileUtil.loadFile(feature_name, current_file_name);
+			//System.out.println(current_file.get(0)[1]);
 			//	Decide if the indexing is needed.
-			//System.out.println(current_file_info_pool);
-			if(current_file_info_pool!=null){
+			//System.out.println(current_file_info_pool.size());
+			//System.out.println(current_file_name + "\t###"+ (current_file_info_pool.size()!=0));
+			if(current_file_info_pool.size()!=0){
 				//System.out.println(current_file_info_pool.containsKey("file_index_column_nums"));
 				if(current_file_info_pool.containsKey("file_index_column_nums")){
 					//	Indexing.
@@ -133,6 +135,7 @@ public abstract class Feature{
 				HashMap<String, ArrayList<String[]>> mapped_file = new HashMap<String, ArrayList<String[]>>();
 				ArrayList<String[]> lines = new ArrayList<String[]>();
 				mapped_file.put(current_file_name, lines);
+				//System.out.println(current_file_name + "\t###"+ current_file);
 				for(int j=0; j<current_file.size(); j++){
 					mapped_file.get(current_file_name).add(current_file.get(j));
 				}
@@ -143,7 +146,7 @@ public abstract class Feature{
 		//*test
 //		System.out.println("########");
 //			Probe.probeMapName(file_pool);
-			//Probe.probeMap("list_GEO_1893_RMA.txt", file_pool.get("list_GEO_1893_RMA.txt"), false);
+			//Probe.probeMap("tempIndex", file_pool.get("tempIndex"), false);
 			//System.out.println(file_pool);
 			//Probe.probeMap(current_file_name, mapped_file);
 		//*/
@@ -167,6 +170,8 @@ public abstract class Feature{
 			String currentTableName = tableNameList.get(i);
 			HashMap<String, ArrayList<String>> currentTableInfo = state.getTable_info(currentTableName);
 				ArrayList<String> currentTableSourceNameList = new ArrayList<String>();
+				System.out.println(currentTableName);
+				System.out.println(currentTableInfo);
 				if(currentTableInfo.containsKey("table_data_source")){
 					currentTableSourceNameList.addAll(currentTableInfo.get("table_data_source"));
 				}
@@ -212,6 +217,7 @@ public abstract class Feature{
 			HashMap<String, HashMap<String, ArrayList<String[]>>> tableSourceMarket) {
 		// TODO Auto-generated method stub
 		ArrayList<String> currentTableSourceNameList = tableSourceInfoPool.get(currentTableName);
+		//System.out.println(currentTableSourceNameList.size());
 		for(int i=0; i<currentTableSourceNameList.size(); i++){
 			String currentTableSourceName = currentTableSourceNameList.get(i);
 			if(!(tableSourceMarket.containsKey(currentTableSourceName))){
@@ -282,7 +288,7 @@ public abstract class Feature{
 		}
 		
 		//*/test_matrix
-		//Probe.probeMap("matrix_list_GEO_1893_RMA.txt", matrix_pool.get("matrix_list_GEO_1893_RMA.txt").getMatrix_data(), false);
+		//Probe.probeMap("matrix_gene_profile_pro", matrix_pool.get("matrix_gene_profile_pro").getMatrix_data(), false);
 		//Probe.probeMap("matrix_arathSuba", matrix_pool.get("matrix_arathSuba").getMatrix_data(), false);
 		//Probe.probeMap("matrix_arathSubaList", matrix_pool.get("matrix_arathSubaList").getMatrix_data(), false);
 		//*/

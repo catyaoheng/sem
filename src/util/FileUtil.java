@@ -22,6 +22,7 @@ public class FileUtil {
 //		System.out.println(Config.getPATHWAY(feature_name).get(file_name));
 //		System.out.println("###");
 		File this_file = new File(Config.getPATHWAY(feature_name).get(file_name));
+		System.out.println("####" + Config.getPATHWAY(feature_name).get(file_name));
 		BufferedReader br = null;
 		ArrayList<String[]> file_data = new ArrayList<String[]>();
 		try {
@@ -74,17 +75,30 @@ public class FileUtil {
 		if(!this_directory.isDirectory()){       
 			this_directory.mkdirs();
 		}
-		if(!this_file.exists()){
+		/*/
+		File[] tempList = this_directory.listFiles();
+		boolean fileExists = false;
+		for(File f: tempList){
+			if(f.getName().endsWith(file_name)){
+				fileExists = true;
+			}
+		}
+		//System.out.println(fileExists);
+		if(!fileExists){
 	    	try {
 	    		this_file.createNewFile();
+	    		//System.out.println(this_file.getName());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    }
+		//*/
 		
 		BufferedWriter bw = null;
 		try{
+			//System.out.println(this_file.getName());
+			//System.out.println(this_file.getName());
 			bw = new BufferedWriter(new FileWriter(this_file, is_from_end));
 			for(int i=0; i<lines.size(); i++){
 				String[] current_line = lines.get(i);
@@ -108,7 +122,9 @@ public class FileUtil {
 				}
 				//*/
 				if(is_show_pro){
-					if(i%(lines.size()/10) == 0){System.out.println("\t\t\tWriting..." + (i/(lines.size()/10))*10 + "% ..." + new Date());}
+					if(lines.size()>=10){
+						if(i%(lines.size()/10) == 0){System.out.println("\t\t\tWriting..." + (i/(lines.size()/10))*10 + "% ..." + new Date());}
+					}
 				}
 				//*/
 			}
@@ -119,10 +135,13 @@ public class FileUtil {
 		}
 	}
 	
-//test	
+	//*/ temp method
+	
+	//*/
+	
+	
+	/*/test	
 	public static void main(String[] args){
-/*		ArrayList<String[]> file_data = new ArrayList<String[]>();
-		file_data = this.loadFiles()
-*/		
 	}
+	//*/
 }

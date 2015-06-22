@@ -90,8 +90,10 @@ public abstract class Calculator {
 					//Cut block & write file
 					//System.out.println("$$$$\t"+value_block_cutter);
 					//*/
-					if(value_block_cutter%(id_matrix_size/10) == 0){
-						System.out.println("\t\t\t" + String.format("%.0f", (value_block_cutter*1.0/id_matrix_size*1.0)*100.0) + "% ..." + new Date());
+					if(id_matrix_size>=10){
+						if(value_block_cutter%(id_matrix_size/10) == 0){
+							System.out.println("\t\t\t" + String.format("%.0f", (value_block_cutter*1.0/id_matrix_size*1.0)*100.0) + "% ..." + new Date());
+						}
 					}
 					//*/
 					if(value_block_cutter%100000 == 0){
@@ -127,8 +129,8 @@ public abstract class Calculator {
 				calculator_data_refer_pool.put(currentCalclatorReferName, calculator_data_source_pool.get(currentCalclatorReferName));
 				calculator_data_source_pool.remove(currentCalclatorReferName);
 			}
-			prepareCalculatorDataRefpool();
 		}
+		prepareCalculatorDataRefpool();
 	}
 	
 	protected abstract void prepareCalculatorDataRefpool();
@@ -224,7 +226,7 @@ public abstract class Calculator {
 			String current_entry_name = entry.getKey().toString();
 			Integer current_entry_num = Integer.valueOf(current_entry_name).intValue();
 			FileUtil.writeFile("value/" + feature_name + "/" + current_data_source_name + '_' + calculator_name, current_entry_name, value_writer_pool.get(current_entry_num), true, false);
-			FileUtil.writeFile("value_cluster/" + feature_name + "/" + current_data_source_name + '_' + calculator_name , current_entry_name, value_writer_pool.get(current_entry_num), true, false);
+			//FileUtil.writeFile("value_cluster/" + feature_name + "/" + current_data_source_name + '_' + calculator_name , current_entry_name, value_writer_pool.get(current_entry_num), true, false);
 		}
 	}
 	

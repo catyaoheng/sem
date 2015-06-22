@@ -1,6 +1,6 @@
 package feature;
 
-public class Interologs extends Feature {
+public class Interology extends Feature {
 	@Override
 	protected void tableOperation(String current_table_name) {
 		// TODO Auto-generated method stub

@@ -34,10 +34,10 @@ public class FeatureCreator{
 			phylogenetic.initialize(feature_name);
 			return phylogenetic;
 		}
-		else if(feature_name.equalsIgnoreCase("Interologs")) {
-			Interologs interologs = new Interologs();
-			interologs.initialize(feature_name);
-			return interologs;
+		else if(feature_name.equalsIgnoreCase("Interology")) {
+			Interology interology = new Interology();
+			interology.initialize(feature_name);
+			return interology;
 		}
 //		else throw new Exception();
 		else return null;

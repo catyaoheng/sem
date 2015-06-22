@@ -10,12 +10,13 @@ import tools.Probe;
 public class Colocalization extends Feature {
 	@Override
 	protected void tableOperation(String currentTableName) {
+		/*/
 		if(currentTableName.equalsIgnoreCase("table_arathSubaList")){//	refer
 			HashMap<String, ArrayList<String[]>> suba = table_pool.get("table_arathSubaProtein").getTable_data();
 			//System.out.println(table_pool.get("table_term").getTable_data().get("term"));
 			prepareSubaList(currentTableName, suba);
 		}
-		
+		//*/
 	}
 
 	@Override
@@ -31,6 +32,7 @@ public class Colocalization extends Feature {
 	}
 
 	//[Methods_1]
+	/*/
 	private void prepareSubaList(String currentTableName,
 			HashMap<String, ArrayList<String[]>> suba) {
 		HashMap<String, ArrayList<String[]>> currentRef = suba;
@@ -93,5 +95,5 @@ public class Colocalization extends Feature {
 		//Probe.probeMap("suba2Protein", suba2Protein, false);
 		table_pool.get(currentTableName).getTable_data().putAll(suba2Protein);
 	}
-
+	//*/
 }

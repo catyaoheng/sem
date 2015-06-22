@@ -24,12 +24,95 @@
 
 <idmap>
 	folder_name= idmap
-	file_names= gene_idmap, coexpression_index, geneontology_index, map_result, ref_aff_agi, arathPhyProfile2GeneEntrezId
-	phylogenetic= 0
+	file_names= gene_idmap, coexpression_index, geneontology_index, map_result, ref_aff_agi, arathPhyProfile2GeneEntrezId, refColocalProtein
+	colocalization= 1
+	phylogenetic= 1
 	coexpression= 1
 	geneontology= 1
 	domain= 1
+	interology= 1
 	#	0 is need map
+<end>
+
+# === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
+<interology>
+	feature_name= interology
+	folder_name= interology
+	value_num= 2
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	file_names= tempIndex
+		<tempIndex>
+			file_index_column_nums= 0
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	table_names= table_tempIndex
+		<table_tempIndex>
+			table_data_source= tempIndex
+			table_discard_column_nums= 0, 1
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	matrix_names= matrix_tempIndex
+		<matrix_tempIndex>
+			matrix_data_source= table_tempIndex
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	calculator_names= blastSimilarity
+		<blastSimilarity>
+			calculator_data_source= matrix_tempIndex
+			is_Abs= 1
+			value_mergin_method= most_correlated
+		<end>	
+<end>
+
+# === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
+<colocalization>
+	feature_name= colocalization
+	folder_name= colocalization
+	value_num= 1
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	file_names= arathSuba, unionProteinProfileTable
+		<arathSuba>
+			file_index_column_nums= 0
+			ref_idmap= refColocalProtein
+		<end>
+		<unionProteinProfileTable>
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	table_names= table_arathSuba, table_unionProteinProfileTable
+	#table_arathSubaProtein, table_arathSubaList
+		#<table_arathSubaProtein>
+		#	table_data_source= arathSuba
+		#	table_discard_column_nums= 0, 1
+		#<end>
+		<table_arathSuba>
+			table_data_source= arathSuba
+			table_discard_column_nums= 0, 1, 2
+		<end>
+		#<table_arathSubaList>
+		#<end>
+		<table_unionProteinProfileTable>
+			table_data_source= unionProteinProfileTable
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	matrix_names= matrix_arathSuba, matrix_unionProteinProfileTable
+	#matrix_arathSubaList, 
+		<matrix_arathSuba>
+			matrix_data_source= table_arathSuba
+		<end>
+		#<matrix_arathSubaList>
+		#	matrix_data_source= table_arathSubaList
+		#<end>
+		<matrix_unionProteinProfileTable>
+			matrix_data_source= table_unionProteinProfileTable
+		<end>
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	calculator_names= subaSimilarity
+		<subaSimilarity>
+			calculator_data_source= matrix_arathSuba
+			calculator_refer_source= matrix_unionProteinProfileTable
+			is_Abs= 1
+			value_mergin_method= most_correlated
+		<end>
 <end>
 
 # === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
@@ -38,31 +121,31 @@
 	folder_name= phylogenetic
 	value_num= 2
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	file_names= arathPhyProfile_100
-		<arathPhyProfile_100>
+	file_names= arathPhyProfile
+		<arathPhyProfile>
 			file_index_column_nums= 1
 			ref_idmap= arathPhyProfile2GeneEntrezId
 		<end>
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	table_names= table_arathPhyProfile_100
-		<table_arathPhyProfile_100>
-			table_data_source= arathPhyProfile_100
+	table_names= table_arathPhyProfile
+		<table_arathPhyProfile>
+			table_data_source= arathPhyProfile
 			table_discard_column_nums= 0, 1, 2, 3
 		<end>
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	matrix_names= matrix_arathPhyProfile_100
-		<matrix_arathPhyProfile_100>
-			matrix_data_source= table_arathPhyProfile_100
+	matrix_names= matrix_arathPhyProfile
+		<matrix_arathPhyProfile>
+			matrix_data_source= table_arathPhyProfile
 		<end>
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	calculator_names= pearsons, mutual
+	calculator_names= mutual
 		<pearsons>
-			calculator_data_source= matrix_arathPhyProfile_100
+			calculator_data_source= matrix_arathPhyProfile
 			is_Abs= 1
 			value_mergin_method= most_correlated
 		<end>
 		<mutual>
-			calculator_data_source= matrix_arathPhyProfile_100
+			calculator_data_source= matrix_arathPhyProfile
 			is_Abs= 1
 			value_mergin_method= most_correlated
 		<end>
@@ -201,6 +284,12 @@
 		<gene_association>
 			file_index_column_nums= 10
 		<end>
+		<gene_product_count>
+		<end>
+		<term>
+		<end>
+		<term2term>
+		<end>
 
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
 	table_names= table_term, table_gene_association, table_gene_association_fun, table_gene_association_pro, table_gene_association_com, table_term2term, table_term_id_pool_fun, table_term_id_pool_pro, table_term_id_pool_com, table_gene_product_count, table_gene_profile_fun, table_gene_profile_pro, table_gene_profile_com
@@ -222,6 +311,7 @@
 			#	column 8 is the evidence
 			#	column 10 is the classification
 			#	table_select_line_markers: the first string in this tab is the column num where the markers are.
+			table_goAcc_num= 6
 			table_select_line_markers= 8, EXP, IDA, IMP, IGI, TAS, IPI, IEP, ISS, ISO, ISA, ISM, IGC, RCA
 		<end>
 		<table_gene_association_fun>

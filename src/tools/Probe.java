@@ -8,6 +8,7 @@ public class Probe{
 //Method[0]	
 	public static void probeMap(String mapName, HashMap<String, ArrayList<String[]>> mapNeedTest, boolean isPrintEmpty){
 		System.out.println("\n== " + mapName + " ==");
+//		System.out.println("\n== " + mapNeedTest + " ==");
 		Iterator mapNeedTestIterator = mapNeedTest.entrySet().iterator();
 		while(mapNeedTestIterator.hasNext()){
 			Map.Entry mapNeedTestEntry = (Map.Entry)mapNeedTestIterator.next();
