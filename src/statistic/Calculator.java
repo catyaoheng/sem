@@ -67,7 +67,7 @@ public abstract class Calculator {
 			ArrayList<String[]> current_value_pool_10k = new ArrayList<String[]>();
 			int value_block_cutter = 0;
 			int id_pool_depth = current_id_need_cal.size();
-			//System.out.println("id_pool_depth = " + id_pool_depth);
+			System.out.println("id_pool_depth = " + id_pool_depth);
 			int id_matrix_size = (id_pool_depth*(id_pool_depth-1))/2;
 			//System.out.println("$$$$\t"+((id_pool_depth*(id_pool_depth-1))/2));
 			//System.out.println("$$$$\t" + id_pool_depth);

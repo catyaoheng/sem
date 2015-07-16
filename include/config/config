@@ -27,11 +27,22 @@
 	file_names= gene_idmap, coexpression_index, geneontology_index, map_result, ref_aff_agi, arathPhyProfile2GeneEntrezId, refColocalProtein
 	colocalization= 1
 	phylogenetic= 1
-	coexpression= 1
+	coexpression= 0
 	geneontology= 1
 	domain= 1
 	interology= 1
+	gsd= 1
 	#	0 is need map
+<end>
+# === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
+<gsd>
+	feature_name= gsd
+	folder_name= gsd
+	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
+	file_names= totalPairUnioned
+		<totalPairUnioned>
+			file_index_column_nums= 0
+		<end>
 <end>
 
 # === ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====
@@ -158,7 +169,7 @@
 	value_num= 5
 
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	file_names= test_abiotic_100
+	file_names= AtGE_light_gcRMA
 	#AtGe_Abiostress_gcRMA, AtGE_dev_gcRMA, AtGE_light_gcRMA, AtGE_pathogen_gcRMA, affy23k_1436_arrays_for_megacluster
 		<test_abiotic_100>
 			file_index_column_nums= 0
@@ -188,7 +199,7 @@
 		<end>
 
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
-	table_names= table_test_abiotic_100
+	table_names= table_AtGE_light_gcRMA
 	#table_AtGe_Abiostress_gcRMA, table_AtGE_dev_gcRMA, table_AtGE_light_gcRMA, table_AtGE_pathogen_gcRMA, table_affy23k_1436_arrays_for_megacluster
 		<table_test_abiotic_100>
 			table_data_source= test_abiotic_100
@@ -230,7 +241,7 @@
 		<end>
 
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
-	matrix_names= matrix_test_abiotic_100
+	matrix_names= matrix_AtGE_light_gcRMA
 	#matrix_AtGe_Abiostress_gcRMA, matrix_AtGE_dev_gcRMA, matrix_AtGE_light_gcRMA, matrix_AtGE_pathogen_gcRMA, matrix_affy23k_1436_arrays_for_megacluster
 		<matrix_test_abiotic_100>
 			matrix_data_source= table_test_abiotic_100
@@ -263,7 +274,7 @@
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====	
 	calculator_names= pearsons
 		<pearsons>
-			calculator_data_source= matrix_test_abiotic_100
+			calculator_data_source= matrix_AtGE_light_gcRMA
 			#matrix_AtGe_Abiostress_gcRMA, matrix_AtGE_dev_gcRMA, matrix_AtGE_light_gcRMA, matrix_AtGE_pathogen_gcRMA, matrix_affy23k_1436_arrays_for_megacluster
 			is_Abs= 1
 			value_mergin_method= most_correlated
@@ -409,6 +420,8 @@
 		# === ==== ==== ==== ====
 		<arth_all_domains>
 			file_index_column_nums= 0
+		<end>
+		<domain_interaction>
 		<end>
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
 	table_names= table_arth_all_domains, table_domain_interaction

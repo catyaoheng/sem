@@ -57,16 +57,23 @@ public class PearsonsCalculator extends Calculator {
 
 	@Override
 	protected String[] mergeValue(ArrayList<String[]> valueCluster) {
-		Double mergedValue = 0.0;
 		String[] mergedValueStr = valueCluster.get(0);
+		Double mergedValue = 0.0;
+		int isHit = 0;
 		for(int i=0; i<valueCluster.size(); i++){
 			String currentValueStr = valueCluster.get(i)[2];
 			Double currentValue = Double.valueOf(currentValueStr).doubleValue();
-			if(currentValue > mergedValue){
+			if(currentValue >= mergedValue){
 				mergedValue = currentValue;
+				isHit = 1;
 			}
 		}
-		mergedValueStr[2] = mergedValue+"";
+		if(isHit == 1){
+			mergedValueStr[2] = mergedValue+"";
+		}
+		else{
+			mergedValueStr[2] = "NA";
+		}
 		return mergedValueStr;
 	}
 

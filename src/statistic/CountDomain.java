@@ -48,6 +48,7 @@ public class CountDomain extends Calculator {
 		//System.out.println("Cluster_1");
 		//Probe.probeStringArray(vectorDomainCluster_1);
 		ArrayList<String[]> domainInteractionList = calculator_data_refer_pool.get("matrix_domain_interaction").get("domain_interaction");
+		int isHit = 0;
 		for(int i=0; i<vectorDomainCluster_0.size(); i++) {
 			String currentPfamId_0 = vectorDomainCluster_0.get(i)[0];
 			for(int j=0; j<vectorDomainCluster_1.size(); j++) {
@@ -55,6 +56,7 @@ public class CountDomain extends Calculator {
 				String currentPfamIdPair_0 = currentPfamId_0 + currentPfamId_1;
 				String currentPfamIdPair_1 = currentPfamId_1 + currentPfamId_0;
 				if(domainInteractionMap.containsKey(currentPfamIdPair_0)){
+					isHit = isHit + 1;
 					//System.out.print("Before\t#####\t");
 					//Probe.probeStrings(blankCount);
 					//Probe.probeStrings(domainInteractionList.get(k));
@@ -65,6 +67,7 @@ public class CountDomain extends Calculator {
 					//Probe.probeStrings(blankCount);
 				}
 				else if(domainInteractionMap.containsKey(currentPfamIdPair_1)){
+					isHit = isHit + 1;
 					for(int l=2; l<17; l++){
 						blankCount[l] = (Integer.valueOf(blankCount[l]) + domainInteractionMap.get(currentPfamIdPair_1)[l-2])+ "";
 					}
@@ -73,7 +76,24 @@ public class CountDomain extends Calculator {
 		}
 		//System.out.print("Filnal\t#####\t ");
 		//Probe.probeStrings(blankCount);
-		dotProduct.add(blankCount);
+		if (isHit>0){
+			String[] finalCount = new String[17];
+			finalCount[0] = blankCount[0];
+			finalCount[1] = blankCount[1];
+			for(int i=2; i<17; i++){
+				finalCount[i] = Integer.valueOf(blankCount[i]).intValue() + "";
+			}
+			dotProduct.add(finalCount);
+		}
+		else{
+			String[] defalutCount = new String[17];
+			defalutCount[0] = blankCount[0];
+			defalutCount[1] = blankCount[1];
+			for(int i=2; i<17; i++){
+				defalutCount[i] = "NA";
+			}
+			dotProduct.add(defalutCount);
+		}
 		//Probe.probeStringArray(dotProduct);
 		return dotProduct;
 	}
