@@ -27,7 +27,7 @@
 	file_names= gene_idmap, coexpression_index, geneontology_index, map_result, ref_aff_agi, arathPhyProfile2GeneEntrezId, refColocalProtein
 	colocalization= 1
 	phylogenetic= 1
-	coexpression= 0
+	coexpression= 1
 	geneontology= 1
 	domain= 1
 	interology= 1
@@ -441,8 +441,8 @@
 			matrix_data_source= table_domain_interaction
 		<end>
 	# === ==== ==== ==== ==== ==== ==== ==== ==== ====
-	calculator_names= countDomain
-		<countDomain>
+	calculator_names= countDomainFraction
+		<countDomainFraction>
 			calculator_data_source= matrix_arth_all_domains
 			calculator_refer_source= matrix_domain_interaction
 			value_mergin_method= most_correlated

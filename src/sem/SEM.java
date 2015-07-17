@@ -7,9 +7,9 @@ import feature.Feature;
 import feature.FeatureCreator;
 
 public class SEM {
-	private Feature coexpression;
+//	private Feature coexpression;
 //	private Feature geneontology;
-//	private Feature domain;
+	private Feature domain;
 //	private Feature phylogenetic;
 //	private Feature colocalization;
 //	private Feature interology;
@@ -23,9 +23,9 @@ public class SEM {
 		System.out.println(">Initializing SEM ...");
 		data_pool = new SEMDataPool();
 		data_pool.initialize();
-		coexpression = FeatureCreator.createFeature("coexpression");
+//		coexpression = FeatureCreator.createFeature("coexpression");
 //		geneontology = FeatureCreator.createFeature("geneontology");
-//		domain = FeatureCreator.createFeature("domain");
+		domain = FeatureCreator.createFeature("domain");
 //		phylogenetic = FeatureCreator.createFeature("phylogenetic");
 //		colocalization = FeatureCreator.createFeature("colocalization");
 //		interology = FeatureCreator.createFeature("interology");
@@ -39,9 +39,9 @@ public class SEM {
 	
 	public void calculateFeature(){
 		System.out.println(">Calculating SEM Feature(s) ...");
-		coexpression.calculate();
+//		coexpression.calculate();
 //		System.out.println(domain);
-//		domain.calculate();
+		domain.calculate();
 //		geneontology.calculate();
 //		colocalization.calculate();
 //		phylogenetic.calculate();

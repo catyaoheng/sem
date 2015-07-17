@@ -36,6 +36,9 @@ public class CalculatorCreator{
 		else if(calculator_name.equalsIgnoreCase("CountDomain")) {
 			return new CountDomain();
 		}
+		else if(calculator_name.equalsIgnoreCase("CountDomainFraction")) {
+			return new CountDomainFraction();
+		}
 		return null;
 	}
 }
